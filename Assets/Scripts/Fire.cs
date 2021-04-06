@@ -9,7 +9,7 @@ public class Fire : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<Rigidbody2D>(AddForce)
+        GetComponent<Rigidbody2D>().AddForce(Vector2.up * force);
     }
 
     

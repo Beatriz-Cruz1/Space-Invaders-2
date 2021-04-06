@@ -5,7 +5,7 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
     [SerializeField]
-    GameObject fire;
+    GameObject Fire;
 
     [SerializeField]
     GameObject nozzle;
@@ -13,12 +13,12 @@ public class Ship : MonoBehaviour
     [SerializeField]
     float velocidade = 5f;
 
-    Vector3 minX, maxX;
+    float minX, maxX;
 
     // Start is called before the first frame update
     void Start()
     {
-        minX = Camera.main.ViewportToWorldPoint(Vector2.zero).x + 0.5;
+        minX = Camera.main.ViewportToWorldPoint(Vector2.zero).x + 0.5f;
         maxX = Camera.main.ViewportToWorldPoint(Vector2.one).x - 0.5f;
     }
 
@@ -27,18 +27,18 @@ public class Ship : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(fire, nozzle.position, nozzle.rotation);
+            Instantiate(Fire, transform.position, transform.rotation);
         }
 
         MoveShip();
 
         void MoveShip()
         {
-            float hMov = GetAxis("Horizontal");
+            float hMov = Input.GetAxis("Horizontal");
             transform.position += hMov * velocidade * Vector3.right * Time.deltaTime;
 
             Vector3 position = transform.position;
-            position.x = Mathf.Clamp(position.x, minX.x, maxX.x);
+            position.x = Mathf.Clamp(position.x, minX, maxX);
             transform.position = position;
         }
         

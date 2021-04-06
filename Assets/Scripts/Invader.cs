@@ -17,13 +17,18 @@ public class Invader : MonoBehaviour
         tempoQuePassou += Time.deltaTime;
         if(tempoQuePassou >= cadencia)
         {
-           Instantiate(fire)
+            Instantiate(Fire, transform.position, transform.rotation);
+            tempoQuePassou = 0f;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
-        Destroy(collision.gameObject);
+        if(collision.gameObject.tag == "ProjetilAmigo")
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
+      
     }
 }
